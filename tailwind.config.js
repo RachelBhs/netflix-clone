@@ -23,8 +23,5 @@ module.exports = {
     require('tailwind-scrollbar-hide'),
     // require('tailwind-scrollbar'),
     require('ps-scrollbar-tailwind'),
-  ],
-  variants: {
-    scrollbar: ['rounded'],
-  }
+  ]
 }
