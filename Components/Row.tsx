@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import { useRef, useState } from 'react';
 import { Movie } from '../typings';
-import Thumbnail from './Thumbnail';
+import Miniature from './Miniature';
 
 interface Props {
   // movie: Movie | DocumentData
@@ -10,12 +10,12 @@ interface Props {
 }
 
 const Row = ({ title, movies }: Props) => {
-
+  // Doc Référence Web API https://developer.mozilla.org/fr/docs/Web/API
   const rowRef = useRef<HTMLDivElement>(null);
-  const [isMoved, setIsMoved] = useState(false)
+  const [isMove, setIsMove] = useState(false)
 
   const handleClick = (direction: string) => {
-    setIsMoved(true);
+    setIsMove(true);
 
     if (rowRef.current) {
       const {scrollLeft, clientWidth} = rowRef.current
@@ -36,13 +36,13 @@ const Row = ({ title, movies }: Props) => {
       </h2>
       <div className="group relative md:-ml-2">
         <ChevronLeftIcon
-          className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 hover:scale-125 group-hover:opacity-100 ${!isMoved && 'hidden'}`}
+          className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 hover:scale-125 group-hover:opacity-100 ${!isMove && 'hidden'}`}
           onClick={() => handleClick('left')}
         />
 
         <div ref={rowRef} className="flex scrollbar-hide items-center space-x-0.5 overflow-x-scroll md:space-x-2.5 md:p-2">
           {movies.map((movie) => (
-            <Thumbnail key={movie.id} movie={movie} />
+            <Miniature key={movie.id} movie={movie} />
           ))}
         </div>
 

@@ -1,8 +1,11 @@
+// Doc https://www.typescriptlang.org/docs/handbook/intro.html => handbook
+
 export interface Genre {
   id: number
   name: string
 }
 
+// info get from doc of themoviedb
 export interface Movie {
   title: string
   backdrop_path: string

@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import { useRecoilValue } from 'recoil';
-import { modalState, movieState } from '../atoms/modalAtom';
+import { modalState } from '../atoms/modalAtom';
 import requests from '../utils/requests';
 import { Movie } from '../typings';
 import Header from '../Components/Header';
 import Banner from '../Components/Banner';
 import Row from '../Components/Row';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../context/useAuth';
 import Modal from '../Components/Modal';
 
 interface Props {
@@ -30,6 +30,7 @@ const Home = ({
   romanceMovies,
   documentaries,
 }: Props) => {
+  // TODO loading view
   const {loading} = useAuth();
   const showModal = useRecoilValue(modalState);
   return (
@@ -45,7 +46,7 @@ const Home = ({
           <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
-          {/* My List */}
+          {/* TODO : My List */}
           <Row title="Comedy" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />
@@ -71,8 +72,8 @@ export const getServerSideProps = async () => {
     romanceMovies,
     documentaries,
   ] = await Promise.all([
-    fetch(requests.fetchNetflixOriginals).then((res) => res.json()),
-    fetch(requests.fetchTrending).then((res) => res.json()),
+    fetch(requests.fetchDiscover).then((res) => res.json()),
+    fetch(requests.fetchTrend).then((res) => res.json()),
     fetch(requests.fetchTopRated).then((res) => res.json()),
     fetch(requests.fetchActionMovies).then((res) => res.json()),
     fetch(requests.fetchComedyMovies).then((res) => res.json()),
